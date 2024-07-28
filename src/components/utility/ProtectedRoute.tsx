@@ -9,7 +9,7 @@ const ProtectedLayout: React.FC = () => {
   console.log("Token:", token);
 
   if (!token) {
-    return <Navigate to="/unauthorized" />;
+    return <Navigate to="/signin" />;
   }
 
   return <Outlet />;

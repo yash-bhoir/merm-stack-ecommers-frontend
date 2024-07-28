@@ -20,11 +20,10 @@ if (rootElement) {
       <BrowserRouter>
         <Routes>
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/" element={<Navigate to="/signin" />} />{" "}
           {/* Redirect to SignIn */}
           <Route path="/signup" element={<SignUp />} />
           <Route element={<ProtectedLayout />}>
-            <Route path="/store" element={<App />} />
+            <Route path="/" element={<App />} />
             <Route path="/home" element={<Home />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/notFound" element={<NotFound />} />

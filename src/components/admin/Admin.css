@@ -1,0 +1,32 @@
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color:white;
+  }
+  
+  .sidebar li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .sidebar li:hover {
+    background-color: gray;
+  }
+  
+  .dropdown {
+    padding-left: 20px;
+  }
+  
+  .dropdown li {
+    padding: 5px 10px;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+  .admin-header { 
+    background-color: #ffffff;
+    border-color: black
+  }

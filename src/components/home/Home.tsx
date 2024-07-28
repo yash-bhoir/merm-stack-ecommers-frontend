@@ -1,19 +1,24 @@
-import Cookies from "js-cookie";
-
-const userId = Cookies.get('userId')|| 'Guest';
-const email = Cookies.get('email');
-const username = Cookies.get('username');
-
-
+import React, { useEffect, useState } from 'react';
+import decryptToken from '../utility/decryptToken';
 
 const Home = () => {
+  const [decodedToken, setDecodedToken] = useState<any>(null);
+
+  useEffect(() => {
+    const token = decryptToken();
+    setDecodedToken(token);
+  }, []);
+
+  if (!decodedToken) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      <h1> {userId}</h1>
-      <h1> {email}</h1>
-      <h1> {username}</h1>
+      <h1>Decoded Token:</h1>
+      <pre>{JSON.stringify(decodedToken, null, 2)}</pre>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
@@ -6,6 +6,7 @@ const SignIn: React.FC = () => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -46,7 +47,7 @@ const SignIn: React.FC = () => {
           sameSite: "Strict",
         });
 
-        navigate("/store");
+        setIsAuthenticated(true);
       } else {
         if (response.status === 401) {
           setError("Incorrect username or password. Please try again.");
@@ -63,6 +64,12 @@ const SignIn: React.FC = () => {
       setError("An unexpected error occurred. Please try again.");
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
