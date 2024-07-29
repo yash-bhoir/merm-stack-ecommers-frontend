@@ -6,6 +6,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoSettingsOutline } from "react-icons/io5";
 import "./Admin.css";
 import { ModeToggle } from "../ui/mode-toggle";
+import Ecommers from "./Ecommers";
 
 const Admin = () => {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -17,7 +18,7 @@ const Admin = () => {
   return (
     <div className="admin-container flex flex-col min-h-screen">
       <header className="admin-header flex justify-between items-center p-4 text-white border-b border-gray-400">
-        <div className="logo text-xl font-bold">FramLogo</div>
+        <div className="logo text-xl font-bold text-black">ShopEasy</div>
         <div className="input-container">
           <InputWithButton />
         </div>
@@ -94,7 +95,10 @@ const Admin = () => {
           </ul>
         </nav>
         <main className="main-content flex-grow p-4">
-          <h1 className="text-2xl font-bold">Hello Admin</h1>
+          {/* <h1 className="text-2xl font-bold">Hello Admin</h1> */}
+          <div>
+          <Ecommers/>
+          </div>
           {/* Add your main content here */}
         </main>
       </div>
