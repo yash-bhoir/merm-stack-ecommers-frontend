@@ -1,17 +1,14 @@
 import { useState } from "react";
-import { InputWithButton } from "../ui/InputWithButton";
 import { CiChat1 } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoSettingsOutline } from "react-icons/io5";
 import "./Admin.css";
-import { ModeToggle } from "../ui/mode-toggle";
-import Ecommers from "./Ecommers";
 
 const Admin = () => {
   const [activeMenu, setActiveMenu] = useState(null);
 
-  const toggleMenu = (menu: any) => {
+  const toggleMenu = (menu ) => {
     setActiveMenu(activeMenu === menu ? null : menu);
   };
 
@@ -20,7 +17,7 @@ const Admin = () => {
       <header className="admin-header flex justify-between items-center p-4 text-white border-b border-gray-400">
         <div className="logo text-xl font-bold text-black">ShopEasy</div>
         <div className="input-container">
-          <InputWithButton />
+          {/* <InputWithButton /> */}
         </div>
         <div className="header-icons flex space-x-10">
           <div>
@@ -38,7 +35,7 @@ const Admin = () => {
             <IoSettingsOutline style={{ color: "black", fontSize: "25px" }} />
           </div>
           <div style={{ color: "black", fontSize: "25px" }}>
-            <ModeToggle />
+            {/* <ModeToggle /> */}
           </div>
         </div>
       </header>
@@ -97,7 +94,7 @@ const Admin = () => {
         <main className="main-content flex-grow p-4">
           {/* <h1 className="text-2xl font-bold">Hello Admin</h1> */}
           <div>
-          <Ecommers/>
+ hi
           </div>
           {/* Add your main content here */}
         </main>
