@@ -1,121 +1,66 @@
-// import { useState } from "react";
-// import { CiChat1 } from "react-icons/ci";
-// import { CiUser } from "react-icons/ci";
-// import { IoIosNotificationsOutline } from "react-icons/io";
-// import { IoSettingsOutline } from "react-icons/io5";
-// import "./Admin.css";
+import React, { useState } from 'react';
 
-import Dashboard from "./Dashboard"
+import './Admin.css';
+import Sidebar from './sidebar/Sidebar';
+import Header from './header/Header';
+import AddProduct from './ecommerce/AddProduct';
+import ProductList from './ecommerce/ProductList';
+import CategoryList from './category/CategoryList';
+import NewCategory from './category/NewCategory';
+import OrderList from './orders/OrderList';
+import OrderDetails from './orders/OrderDetails';
+import OrderTracking from './orders/OrderTracking';
+import Bills from './bills/Bills';
+import Users from './users/Users';
+import Notification from './notification/Notification';
+import MyAccount from './account/MyAccount';
+import Exit from './exit/Exit';
 
-// const Admin = () => {
-//   const [activeMenu, setActiveMenu] = useState(null);
+const Admin: React.FC = () => {
+    const [selectedComponent, setSelectedComponent] = useState<string>('Dashboard');
 
-//   const toggleMenu = (menu ) => {
-//     setActiveMenu(activeMenu === menu ? null : menu);
-//   };
+    const renderComponent = () => {
+        switch (selectedComponent) {
+            case 'Add Product':
+                return <AddProduct />;
+            case 'Product List':
+                return <ProductList />;
+            case 'Category List':
+                return <CategoryList />;
+            case 'New Category':
+                return <NewCategory />;
+            case 'Order List':
+                return <OrderList />;
+            case 'Order Details':
+                return <OrderDetails />;
+            case 'Order Tracking':
+                return <OrderTracking />;
+            case 'Bills':
+                return <Bills />;
+            case 'Users':
+                return <Users />;
+            case 'Notifications':
+                return <Notification />;
+            case 'Account':
+                return <MyAccount />;
+            case 'Exit':
+                return <Exit />;
+            default:
+                return <div>Select an option from the sidebar.</div>;
+        }
+    };
 
-//   return (
-//     <div className="admin-container flex flex-col min-h-screen">
-//       <header className="admin-header flex justify-between items-center p-4 text-white border-b border-gray-400">
-//         <div className="logo text-xl font-bold text-black">ShopEasy</div>
-//         <div className="input-container">
-//           {/* <InputWithButton /> */}
-//         </div>
-//         <div className="header-icons flex space-x-10">
-//           <div>
-//             <IoIosNotificationsOutline
-//               style={{ color: "black", fontSize: "25px" }}
-//             />
-//           </div>
-//           <div>
-//             <CiChat1 style={{ color: "black", fontSize: "25px" }} />
-//           </div>
-//           <div>
-//             <CiUser style={{ color: "black", fontSize: "25px" }} />
-//           </div>
-//           <div>
-//             <IoSettingsOutline style={{ color: "black", fontSize: "25px" }} />
-//           </div>
-//           <div style={{ color: "black", fontSize: "25px" }}>
-//             {/* <ModeToggle /> */}
-//           </div>
-//         </div>
-//       </header>
+    return (
+        <div className="page-container">
+            <Sidebar setSelectedComponent={setSelectedComponent} />
+            <div className="main-content">
+                <Header />
+                <div className="content">
+                    {renderComponent()}
+                </div>
+            </div>
+        </div>
+    );
+};
 
-//       <div className="admin-content flex flex-grow">
-//         <nav className="sidebar text-black w-64 p-4 border-r border-gray-400">
-//           <ul className="space-y-2">
-//             <li
-//               className="cursor-pointer"
-//               onClick={() => toggleMenu("dashboard")}
-//             >
-//               Dashboard
-//             </li>
-//             <li
-//               className="cursor-pointer"
-//               onClick={() => toggleMenu("ecommerce")}
-//             >
-//               Ecommerce
-//             </li>
-//             {activeMenu === "ecommerce" && (
-//               <ul className="dropdown pl-4 space-y-1">
-//                 <li>Add Product</li>
-//                 <li>Product List</li>
-//               </ul>
-//             )}
-//             <li
-//               className="cursor-pointer"
-//               onClick={() => toggleMenu("category")}
-//             >
-//               Category
-//             </li>
-//             {activeMenu === "category" && (
-//               <ul className="dropdown pl-4 space-y-1">
-//                 <li>Category List</li>
-//                 <li>New Category</li>
-//               </ul>
-//             )}
-//             <li className="cursor-pointer" onClick={() => toggleMenu("orders")}>
-//               Orders
-//             </li>
-//             {activeMenu === "orders" && (
-//               <ul className="dropdown pl-4 space-y-1">
-//                 <li>Order List</li>
-//                 <li>Order Details</li>
-//                 <li>Order Tracking</li>
-//               </ul>
-//             )}
-//             <li className="cursor-pointer" onClick={() => toggleMenu("bills")}>
-//               Bills
-//             </li>
-//             <li className="cursor-pointer" onClick={() => toggleMenu("users")}>
-//               Users
-//             </li>
-//           </ul>
-//         </nav>
-//         <main className="main-content flex-grow p-4">
-//           {/* <h1 className="text-2xl font-bold">Hello Admin</h1> */}
-//           <div>
-//  hi
-//           </div>
-//           {/* Add your main content here */}
-//         </main>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Admin;
-
-
-
-const Admin = () => {
-  return (
-    <div>
-      <Dashboard/>
-      
-    </div>
-  )
-}
-
-export default Admin
+export default Admin;

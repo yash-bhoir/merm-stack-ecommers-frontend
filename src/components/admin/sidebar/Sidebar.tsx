@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Sidebar.css"; // Import the CSS file
+import "./Sidebar.css";
 
 import {
   Drawer,
@@ -9,7 +9,7 @@ import {
   IconButton,
   ListItemText,
   Collapse,
-  Tooltip, // Import Tooltip
+  Tooltip,
 } from "@mui/material";
 import {
   Menu,
@@ -28,11 +28,11 @@ import {
 } from "@mui/icons-material";
 
 interface SidebarProps {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedComponent: (component: string) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
+const Sidebar: React.FC<SidebarProps> = ({ setSelectedComponent }) => {
+  const [open, setOpen] = useState(true);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   const toggleSidebar = () => setOpen(!open);
@@ -44,12 +44,12 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
   return (
     <Drawer
       variant="permanent"
-      className="sidebar"
+      className={`sidebar ${open ? "sidebar-open" : "sidebar-collapsed"}`}
       sx={{
-
-        width: open ? 240 : 60,
+        "--sidebar-width": open ? "240px" : "60px",
+        width: "var(--sidebar-width)",
         "& .MuiDrawer-paper": {
-          width: open ? 240 : 60,
+          width: "var(--sidebar-width)",
           transition: "width 0.3s",
           overflowX: "hidden",
           overflowY: "auto",
@@ -59,7 +59,8 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
           borderBottom: "2px solid #ddd",
           borderRadius: "20px 20px 20px 20px",
           marginLeft: "10px",
-          height: "100%",
+          height: "90%",
+          marginTop : "20px"
         },
       }}
     >
@@ -80,7 +81,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
         </ListItem>
 
         <Tooltip title={open ? "" : "Dashboard"}>
-          <ListItem button onClick={() => handleMenuClick("Dashboard")}>
+          <ListItem button onClick={() => setSelectedComponent("Dashboard")}>
             <ListItemIcon>
               <Dashboard />
             </ListItemIcon>
@@ -106,7 +107,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
         <Collapse in={activeMenu === "Ecommerce"} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <Tooltip title={open ? "" : "Add Product"}>
-              <ListItem button sx={{ pl: 4 }}>
+              <ListItem button sx={{ pl: 4 }} onClick={() => setSelectedComponent("Add Product")}>
                 <ListItemIcon>
                   <Add />
                 </ListItemIcon>
@@ -114,7 +115,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
               </ListItem>
             </Tooltip>
             <Tooltip title={open ? "" : "Product List"}>
-              <ListItem button sx={{ pl: 4 }}>
+              <ListItem button sx={{ pl: 4 }} onClick={() => setSelectedComponent("Product List")}>
                 <ListItemIcon>
                   <ListAlt />
                 </ListItemIcon>
@@ -138,7 +139,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
         <Collapse in={activeMenu === "Category"} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <Tooltip title={open ? "" : "Category List"}>
-              <ListItem button sx={{ pl: 4 }}>
+              <ListItem button sx={{ pl: 4 }} onClick={() => setSelectedComponent("Category List")}>
                 <ListItemIcon>
                   <ListAlt />
                 </ListItemIcon>
@@ -146,7 +147,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
               </ListItem>
             </Tooltip>
             <Tooltip title={open ? "" : "New Category"}>
-              <ListItem button sx={{ pl: 4 }}>
+              <ListItem button sx={{ pl: 4 }} onClick={() => setSelectedComponent("New Category")}>
                 <ListItemIcon>
                   <Add />
                 </ListItemIcon>
@@ -169,7 +170,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
         <Collapse in={activeMenu === "Orders"} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <Tooltip title={open ? "" : "Order List"}>
-              <ListItem button sx={{ pl: 4 }}>
+              <ListItem button sx={{ pl: 4 }} onClick={() => setSelectedComponent("Order List")}>
                 <ListItemIcon>
                   <ListAlt />
                 </ListItemIcon>
@@ -177,7 +178,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
               </ListItem>
             </Tooltip>
             <Tooltip title={open ? "" : "Order Details"}>
-              <ListItem button sx={{ pl: 4 }}>
+              <ListItem button sx={{ pl: 4 }} onClick={() => setSelectedComponent("Order Details")}>
                 <ListItemIcon>
                   <Edit />
                 </ListItemIcon>
@@ -185,7 +186,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
               </ListItem>
             </Tooltip>
             <Tooltip title={open ? "" : "Order Tracking"}>
-              <ListItem button sx={{ pl: 4 }}>
+              <ListItem button sx={{ pl: 4 }} onClick={() => setSelectedComponent("Order Tracking")}>
                 <ListItemIcon>
                   <People />
                 </ListItemIcon>
@@ -196,7 +197,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
         </Collapse>
 
         <Tooltip title={open ? "" : "Bills"}>
-          <ListItem button onClick={() => handleMenuClick("Bills")}>
+          <ListItem button onClick={() => setSelectedComponent("Bills")}>
             <ListItemIcon>
               <ExitToApp />
             </ListItemIcon>
@@ -205,7 +206,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
         </Tooltip>
 
         <Tooltip title={open ? "" : "Users"}>
-          <ListItem button onClick={() => handleMenuClick("Users")}>
+          <ListItem button onClick={() => setSelectedComponent("Users")}>
             <ListItemIcon>
               <People />
             </ListItemIcon>
@@ -221,7 +222,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
         }}
       >
         <Tooltip title={open ? "" : "Notifications"}>
-          <ListItem button onClick={() => handleMenuClick("Notifications")}>
+          <ListItem button onClick={() => setSelectedComponent("Notifications")}>
             <ListItemIcon>
               <Notifications />
             </ListItemIcon>
@@ -229,7 +230,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
           </ListItem>
         </Tooltip>
         <Tooltip title={open ? "" : "Account"}>
-          <ListItem button onClick={() => handleMenuClick("Account")}>
+          <ListItem button onClick={() => setSelectedComponent("Account")}>
             <ListItemIcon>
               <AccountCircle />
             </ListItemIcon>
@@ -237,7 +238,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
           </ListItem>
         </Tooltip>
         <Tooltip title={open ? "" : "Exit"}>
-          <ListItem button onClick={() => handleMenuClick("Exit")}>
+          <ListItem button onClick={() => setSelectedComponent("Exit")}>
             <ListItemIcon>
               <ExitToApp />
             </ListItemIcon>
