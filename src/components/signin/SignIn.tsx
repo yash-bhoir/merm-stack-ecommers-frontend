@@ -11,7 +11,7 @@ const SignIn: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setError(null); // Reset error state
+    setError(null);  
     try {
       const response = await fetch("http://localhost:8080/api/v1/users/login", {
         method: "POST",
@@ -28,21 +28,6 @@ const SignIn: React.FC = () => {
 
         Cookies.set("accessToken", data.accessToken, {
           expires: 1,
-          secure: true,
-          sameSite: "Strict",
-        });
-        Cookies.set("username", data.user.username, {
-          expires: 7,
-          secure: true,
-          sameSite: "Strict",
-        });
-        Cookies.set("userId", data.user.id, {
-          expires: 7,
-          secure: true,
-          sameSite: "Strict",
-        });
-        Cookies.set("email", data.user.email, {
-          expires: 7,
           secure: true,
           sameSite: "Strict",
         });
