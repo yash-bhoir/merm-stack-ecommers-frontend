@@ -1,14 +1,13 @@
-// src/components/utility/ProtectedLayout.tsx
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 const ProtectedLayout: React.FC = () => {
-  const token = Cookies.get('accessToken');
+  const isAuthenticated = Cookies.get('IsAuthenticated');
 
-  console.log("Token:", token);
+  console.log("IsAuthenticated Cookie:", isAuthenticated);
 
-  if (!token) {
+  if (!isAuthenticated) {
     return <Navigate to="/signin" />;
   }
 

@@ -7,13 +7,13 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);  
     try {
-      const response = await fetch("http://localhost:8080/api/v1/users/login", {
+      const response = await fetch("http://localhost:5173/api/v1/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -22,17 +22,12 @@ const SignIn: React.FC = () => {
       });
 
       if (response.ok) {
-        const responseData = await response.json();
-        console.log("Response Data:", responseData);
-        const { data } = responseData;
-
-        Cookies.set("accessToken", data.accessToken, {
+        setIsAuthenticated(true);
+        Cookies.set("IsAuthenticated", "true", {
           expires: 1,
           secure: true,
           sameSite: "Strict",
         });
-
-        setIsAuthenticated(true);
       } else {
         if (response.status === 401) {
           setError("Incorrect username or password. Please try again.");

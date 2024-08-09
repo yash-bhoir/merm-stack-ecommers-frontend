@@ -12,14 +12,26 @@ const Navbar: React.FC = () => {
     setDecodedToken(token);
   }, []);
 
-  const handleLogout = () => {
-    Cookies.remove('accessToken', { secure: true, sameSite: 'Strict' });
-    Cookies.remove('username', { secure: true, sameSite: 'Strict' });
-    Cookies.remove('userId', { secure: true, sameSite: 'Strict' });
-    Cookies.remove('email', { secure: true, sameSite: 'Strict' });
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('http://localhost:5173/api/v1/users/logout', {
+        method: 'POST',
+        credentials: 'include', 
+      });
 
-    navigate('/signin');
+      if (response.ok) {
+        Cookies.remove('IsAuthenticated', { secure: true, sameSite: 'Strict' });
+        navigate('/signin');
+      } else {
+        console.error('Failed to log out');
+        // Optionally, handle logout failure (e.g., show an error message)
+      }
+    } catch (error) {
+      console.error('An error occurred while logging out:', error);
+    }
   };
+
+ 
 
   const handleAdmin = () => {
     navigate('/admin');
